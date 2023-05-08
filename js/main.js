@@ -2,10 +2,14 @@ function getEle(id) {
   return document.getElementById(id);
 }
 var listNumber = [];
+var arr = [];
 function themSo() {
   var number = Number(getEle("inputNum").value);
+  var num = Number(getEle("inputNum3").value);
   listNumber.push(number);
+  arr.push(num);
   getEle("showKQ").innerHTML = listNumber.join(", ");
+  getEle("showKQ9").innerHTML = arr.join(", ");
 }
 
 function tinhTong() {
@@ -39,7 +43,7 @@ function timSoNN() {
     return;
   }
   var min = listNumber[0];
-  for (var i = 0; i < listNumber.length; i++) {
+  for (var i = 1; i < listNumber.length; i++) {
     if (listNumber[i] < min) {
       min = listNumber[i];
     }
@@ -123,4 +127,29 @@ function findFirstPrime(arr) {
 function soNguyenTo() {
   var firstPrime = findFirstPrime(listNumber);
   getEle("showKQ8").innerHTML = firstPrime;
+}
+
+function demSoNguyen() {
+  var int = arr.filter((num) => Number.isInteger(num));
+  var count = int.length;
+  getEle("showKQ10").innerHTML = count;
+}
+
+function soSanhSoLuong() {
+  var soDuong = 0;
+  var soAm = 0;
+  for (var i = 0; i < listNumber.length; i++) {
+    if (listNumber[i] > 0) {
+      soDuong++;
+    } else if (listNumber[i] < 0) {
+      soAm++;
+    }
+  }
+  if (soDuong > soAm) {
+    getEle("showKQ11").innerHTML = "Số dương > số âm";
+  } else if (soDuong < soAm) {
+    getEle("showKQ11").innerHTML = "Số âm > số dương";
+  } else {
+    getEle("showKQ11").innerHTML = "Số dương = số âm";
+  }
 }
